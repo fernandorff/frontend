@@ -1,0 +1,55 @@
+image: node:18-alpine
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "homolog" || $CI_COMMIT_BRANCH == "main"
+      when: always  
+
+cache:
+  key: $CI_PROJECT_ID
+  paths:
+    - node_modules/      
+    - .trivycache/
+
+stages:
+  - install
+  - build
+  - deploy
+  
+variables:
+    IMAGE: $CI_REGISTRY/renach/frontend:$CI_COMMIT_SHORT_SHA
+
+npm-install:
+  stage: install
+  script: npm ci
+
+docker-build:
+  image: docker:stable
+  services:
+    - name: docker:dind
+  before_script:
+    - export TRIVY_VERSION=$(wget -qO - "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+    - wget --no-verbose https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -O - | tar -zxvf -
+  environment: "$CI_COMMIT_BRANCH"
+  stage: build
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY 
+    - docker build -t $IMAGE . --build-arg BUILD_ENV=$CI_COMMIT_BRANCH
+    - ./trivy image $IMAGE --exit-code 0 --severity=HIGH --cache-dir .trivycache/ --no-progress
+    - ./trivy image $IMAGE --exit-code 0 --severity=CRITICAL --cache-dir .trivycache/ --no-progress
+    - docker push $IMAGE
+    
+k8s-deploy:
+  image: 
+    name: bitnami/kubectl
+    entrypoint: [""]
+  stage: deploy
+  environment: "$CI_COMMIT_BRANCH"
+  script:
+    - kubectl config set-cluster k8s --server=https://$KUBE_HOST:6443 --certificate-authority=$KUBE_API_CERT
+    - kubectl config set-credentials deployer --token=$KUBE_API_TOKEN
+    - kubectl config set-context k8s --cluster k8s --user deployer
+    - kubectl config use-context k8s
+    - kubectl get po -n renach
+    - kubectl set image -n renach deployment/frontend frontend=$IMAGE
+    - kubectl rollout status -n renach deployment/frontend
