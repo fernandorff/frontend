@@ -10,7 +10,6 @@ import {
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Icon from '@ant-design/icons';
-import { router } from 'next/client';
 import { usePathname } from 'next/navigation';
 
 const menuItems: MenuProps['items'] = [

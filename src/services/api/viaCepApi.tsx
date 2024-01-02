@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Post } from '@reduxjs/toolkit/src/query/tests/mocks/server';
 import { IViaCepGetAddressByCepResponse } from '@/typings/response/iViaCepGetAddressByCepResponse';
 
 export const ViaCepApi = createApi({
