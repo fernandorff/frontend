@@ -12,6 +12,9 @@ export const rootTheme: ThemeConfig = {
     Dropdown: {
       controlItemBgActive: blue[0], // cor azul claro
     },
+    Select: {
+      controlHeightLG: 50,
+    },
     Input: {
       controlHeightLG: 50,
     },
@@ -21,7 +24,7 @@ export const rootTheme: ThemeConfig = {
     },
     Menu: {
       activeBarBorderWidth: 0,
-      collapsedIconSize: 18, // cor oficial detran
+      collapsedIconSize: 18,
       colorFillAlter: 'white',
       darkItemBg: cyan[7],
       iconSize: 18,

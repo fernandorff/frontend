@@ -1,43 +1,68 @@
-import { Avatar, Button, Dropdown, Menu, Space, Typography } from 'antd';
-import { DownOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { BiLogOut } from 'react-icons/bi';
+import { Avatar, Button, Dropdown, Flex, Menu, Typography } from 'antd';
+import Icon from '@ant-design/icons';
+import { BiCog, BiLogOut, BiUser } from 'react-icons/bi';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoggedUserDropdown() {
-  function handleMenuClick(e: any) {
-    console.log('click', e);
+  const router = useRouter();
+
+  function handleMenuClickNavigation(e: any) {
+    router.push(e.key);
   }
 
   return (
     <>
       <Dropdown
         overlay={
-          <Menu onClick={handleMenuClick} defaultSelectedKeys={['profile']}>
-            <Menu.Item key="profile" icon={<UserOutlined />}>
+          <Menu onClick={handleMenuClickNavigation} mode={'inline'}>
+            <Menu.Item
+              key="meu-perfil"
+              icon={
+                <Icon>
+                  <BiUser />
+                </Icon>
+              }
+            >
               Meu Perfil
             </Menu.Item>
-            <Menu.Item icon={<SettingOutlined />}>
+            <Menu.Item
+              key="configuracoes-conta"
+              icon={
+                <Icon>
+                  <BiCog />
+                </Icon>
+              }
+            >
               Configurações da conta
             </Menu.Item>
-            <Menu.Item icon={<BiLogOut />} danger>
+            <Menu.Divider />
+            <Menu.Item
+              key={'logout'}
+              icon={
+                <Icon>
+                  <BiLogOut />
+                </Icon>
+              }
+              danger
+            >
               Sair
             </Menu.Item>
           </Menu>
         }
       >
         <Button size={'large'} type={'text'} className={'h-16'}>
-          <Space>
+          <Flex align={'center'} gap={'0.5rem'}>
             <Avatar
               size={'default'}
               className={'cursor-pointer'}
               shape={'circle'}
-              src={'avatar-template.svg'}
+              src={'/user-avatar-mockup.svg'}
             />
             <Typography.Text className={'text-white'}>
               Deltrano Santos
             </Typography.Text>
-            <DownOutlined className={'text-white text-xm '} />
-          </Space>
+          </Flex>
         </Button>
       </Dropdown>
     </>

@@ -15,6 +15,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { PersonsApi } from '@/services/api/personsApi';
+import { ViaCepApi } from '@/services/api/viaCepApi';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   [PersonsApi.reducerPath]: PersonsApi.reducer,
+  [ViaCepApi.reducerPath]: ViaCepApi.reducer,
   toggleSidebar: toggleSidebarReducer,
   token: tokenReducer,
   alerts: alertsReducer,
@@ -38,7 +40,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(PersonsApi.middleware),
+    }).concat(PersonsApi.middleware, ViaCepApi.middleware),
 });
 const persistor = persistStore(store);
 

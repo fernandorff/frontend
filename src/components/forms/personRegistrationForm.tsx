@@ -5,12 +5,46 @@ import {
   Flex,
   Form,
   Input,
+  notification,
   Row,
+  Select,
   Typography,
 } from 'antd';
+import { BR_CELLPHONE_MASK, CEP_MASK, CPF_MASK } from '@/constants/forms/masks';
+import { federalUnits } from '@/constants/_domain/federal-units';
+import { useLazyGetAddressByCepQuery } from '@/services/api/viaCepApi';
+import Icon from '@ant-design/icons';
+import { BiSearch } from 'react-icons/bi';
+
+const InputMask = require('react-input-mask');
 
 export function PersonRegistrationForm() {
   const [form] = Form.useForm();
+
+  const [getAddressByCep, { data: addressData, error }] =
+    useLazyGetAddressByCepQuery();
+
+  async function handleSearch() {
+    await getAddressByCep(form.getFieldValue('cep'));
+    if (addressData) {
+      if (addressData.erro) {
+        notification.error({
+          message: 'Endereço não encontrado',
+          description: null,
+        });
+      } else {
+        notification.success({
+          message: 'Endereço encontrado.',
+        });
+        form.setFieldsValue({
+          streetName: addressData.logradouro,
+          neighborhood: addressData.bairro,
+          city: addressData.localidade,
+          federalUnit: addressData.uf,
+        });
+      }
+    }
+  }
 
   return (
     <>
@@ -22,6 +56,10 @@ export function PersonRegistrationForm() {
           prefix: '0',
         }}
         scrollToFirstError
+        onFinish={(values) => console.log(values)}
+        onKeyPress={(e) => {
+          e.key === 'Enter' && e.preventDefault();
+        }}
       >
         <Typography.Title level={4}>Cadastro de Pessoa</Typography.Title>
 
@@ -35,14 +73,20 @@ export function PersonRegistrationForm() {
                   ? 'Preencha com o CPF para buscar os dados pessoais do cadastrante'
                   : null
               }
-              rules={[
-                {
-                  required: true,
-                  message: 'CPF é obrigatório!',
-                },
-              ]}
+              rules={[{ required: true, message: 'CPF é obrigatório!' }]}
             >
-              <Input size={'large'} placeholder={'CPF'} />
+              <InputMask
+                mask={CPF_MASK}
+                maskChar={null}
+                value={form.getFieldValue('cpf')}
+                onChange={(e: any) =>
+                  form.setFieldsValue({ cpf: e.target.value })
+                }
+              >
+                {() => (
+                  <Input size={'large'} placeholder={CPF_MASK} maxLength={14} />
+                )}
+              </InputMask>
             </Form.Item>
           </Col>
 
@@ -80,7 +124,6 @@ export function PersonRegistrationForm() {
               <DatePicker
                 size={'large'}
                 style={{ width: '100%' }}
-                // defaultValue={dayjs('01/01/2015')}
                 format={['DD/MM/YYYY']}
               />
             </Form.Item>
@@ -99,7 +142,30 @@ export function PersonRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} placeholder={'12345-678'} />
+              <InputMask
+                mask={CEP_MASK}
+                maskChar={null}
+                value={form.getFieldValue('cep')}
+                onChange={(e: any) =>
+                  form.setFieldsValue({ cep: e.target.value })
+                }
+              >
+                {() => (
+                  <Input.Search
+                    size={'large'}
+                    placeholder={CEP_MASK}
+                    onSearch={handleSearch}
+                    maxLength={9}
+                    enterButton={
+                      <Button disabled={form.getFieldValue('cep')?.length != 9}>
+                        <Icon>
+                          <BiSearch />
+                        </Icon>
+                      </Button>
+                    }
+                  />
+                )}
+              </InputMask>
             </Form.Item>
           </Col>
 
@@ -121,6 +187,22 @@ export function PersonRegistrationForm() {
 
           <Col span={8}>
             <Form.Item
+              name={'streetNumber'}
+              label={'Número'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Número é obrigatório!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input size={'large'} placeholder={'123'} />
+            </Form.Item>
+          </Col>
+
+          <Col span={8}>
+            <Form.Item
               name={'streetComplement'}
               label={'Complemento'}
               rules={[
@@ -131,7 +213,7 @@ export function PersonRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} placeholder={'44'} />
+              <Input size={'large'} placeholder={'Bloco A Apto 01'} />
             </Form.Item>
           </Col>
 
@@ -179,7 +261,13 @@ export function PersonRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} placeholder={'ES'} />
+              <Select size="large" placeholder="Selecione UF">
+                {federalUnits.map((state) => (
+                  <Select.Option value={state.UF} key={state.UF}>
+                    {`${state.name} - ${state.UF}`}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
 
@@ -189,7 +277,16 @@ export function PersonRegistrationForm() {
               label={'Telefone 1'}
               rules={[{ required: true, message: 'Telefone 1 é obrigatório!' }]}
             >
-              <Input size={'large'} placeholder={'(12)1234-1234'} />
+              <InputMask
+                mask={BR_CELLPHONE_MASK}
+                maskChar={null}
+                value={form.getFieldValue('phone1')}
+                onChange={(e: any) =>
+                  form.setFieldsValue({ phone1: e.target.value })
+                }
+              >
+                {() => <Input size={'large'} placeholder={BR_CELLPHONE_MASK} />}
+              </InputMask>
             </Form.Item>
           </Col>
 
@@ -199,7 +296,16 @@ export function PersonRegistrationForm() {
               label={'Telefone 2'}
               rules={[{ required: true, message: 'Telefone 2 é obrigatório!' }]}
             >
-              <Input size={'large'} placeholder={'(12)1234-1234'} />
+              <InputMask
+                mask={BR_CELLPHONE_MASK}
+                maskChar={null}
+                value={form.getFieldValue('phone2')}
+                onChange={(e: any) =>
+                  form.setFieldsValue({ phone2: e.target.value })
+                }
+              >
+                {() => <Input size={'large'} placeholder={BR_CELLPHONE_MASK} />}
+              </InputMask>
             </Form.Item>
           </Col>
 
@@ -225,7 +331,11 @@ export function PersonRegistrationForm() {
 
         <Flex className={'justify-between'}>
           <Form.Item>
-            <Button size={'large'} type={'default'}>
+            <Button
+              size={'large'}
+              type={'default'}
+              onClick={() => form.resetFields()}
+            >
               Cancelar
             </Button>
           </Form.Item>

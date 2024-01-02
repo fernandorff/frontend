@@ -1,26 +1,28 @@
-import Icon, { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import React from 'react';
 import { Breadcrumb, Flex } from 'antd';
-import { BiUserPlus } from 'react-icons/bi';
 
-export default function Breadcrumbs() {
+interface BreadcrumbItem {
+  name: string;
+  href: string;
+  icon: JSX.Element;
+}
+
+interface BreadcrumbsProps {
+  items: BreadcrumbItem[];
+}
+
+export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <>
       <Breadcrumb className={'mb-4'}>
-        <Breadcrumb.Item href="" key="home">
-          <HomeOutlined /> Home
-        </Breadcrumb.Item>
-        <Breadcrumb.Item href="" key="appList">
-          <Flex gap={'0.25rem'}>
-            <Icon className={'text-xl'}>
-              <BiUserPlus />
-            </Icon>
-            Cadastros
-          </Flex>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item key="app">
-          <UserOutlined /> Cadastro de Pessoa
-        </Breadcrumb.Item>
+        {items.map((item, index) => (
+          <Breadcrumb.Item href={item.href} key={index}>
+            <Flex gap={'0.25rem'}>
+              {item.icon}
+              {item.name}
+            </Flex>
+          </Breadcrumb.Item>
+        ))}
       </Breadcrumb>
     </>
   );
