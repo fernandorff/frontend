@@ -10,10 +10,12 @@ import {
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Icon from '@ant-design/icons';
+import { router } from 'next/client';
+import { usePathname } from 'next/navigation';
 
 const menuItems: MenuProps['items'] = [
   {
-    key: 'home',
+    key: '/',
     icon: (
       <Icon>
         <BiHome />
@@ -22,7 +24,7 @@ const menuItems: MenuProps['items'] = [
     label: <Link href="/">Home</Link>,
   },
   {
-    key: 'cadastros',
+    key: '/cadastros',
     icon: (
       <Icon>
         <BiUserPlus />
@@ -31,17 +33,17 @@ const menuItems: MenuProps['items'] = [
     label: 'Cadastros',
     children: [
       {
-        key: 'cadastro-pessoa',
+        key: '/cadastros/cadastro-pessoa',
         label: <Link href="/cadastros/cadastro-pessoa">Cadastrar Pessoa</Link>,
       },
       {
-        key: 'cadastro-entidade',
+        key: '/cadastros/cadastro-entidade',
         label: (
           <Link href="/cadastros/cadastro-entidade">Cadastrar Entidade</Link>
         ),
       },
       {
-        key: 'cadastro-veiculo',
+        key: '/cadastros/cadastro-veiculo',
         label: (
           <Link href="/cadastros/cadastro-veiculo">Cadastrar Veículo</Link>
         ),
@@ -49,7 +51,7 @@ const menuItems: MenuProps['items'] = [
     ],
   },
   {
-    key: 'profissionais',
+    key: '/profissionais',
     icon: (
       <Icon>
         <BiBriefcase />
@@ -58,7 +60,7 @@ const menuItems: MenuProps['items'] = [
     label: 'Profissionais',
     children: [
       {
-        key: 'associar-profissionais',
+        key: '/profissionais/associar-profissionais',
         label: (
           <Link href="/profissionais/associar-profissionais">
             Associar Profissionais
@@ -68,7 +70,7 @@ const menuItems: MenuProps['items'] = [
     ],
   },
   {
-    key: 'credenciamento',
+    key: '/credenciamento',
     icon: (
       <Icon>
         <BiIdCard />
@@ -77,7 +79,7 @@ const menuItems: MenuProps['items'] = [
     label: 'Credenciamento',
     children: [
       {
-        key: 'credenciar-pessoa',
+        key: '/credenciamento/credenciar-pessoa',
         label: (
           <Link href="/credenciamento/credenciar-pessoa">
             Credenciar Pessoa
@@ -85,7 +87,7 @@ const menuItems: MenuProps['items'] = [
         ),
       },
       {
-        key: 'credenciar-entidade',
+        key: '/credenciamento/credenciar-entidade',
         label: (
           <Link href="/credenciamento/credenciar-entidade">
             Credenciar Entidade
@@ -95,7 +97,7 @@ const menuItems: MenuProps['items'] = [
     ],
   },
   {
-    key: 'solicitacoes',
+    key: '/solicitacoes',
     icon: (
       <Icon>
         <BiTable />
@@ -104,7 +106,7 @@ const menuItems: MenuProps['items'] = [
     label: 'Solicitações',
     children: [
       {
-        key: 'listar-solicitacoes',
+        key: '/solicitacoes/listar-solicitacoes',
         label: (
           <Link href="/solicitacoes/listar-solicitacoes">
             Listar Solicitações
@@ -114,7 +116,7 @@ const menuItems: MenuProps['items'] = [
     ],
   },
   {
-    key: 'relatorios',
+    key: '/relatorios',
     icon: (
       <Icon>
         <BiTrendingUp />
@@ -123,7 +125,7 @@ const menuItems: MenuProps['items'] = [
     label: 'Relatórios',
     children: [
       {
-        key: 'listar-relatorios',
+        key: '/relatorios/historico-solicitacoes',
         label: (
           <Link href="/relatorios/historico-solicitacoes">
             Histórico de Solicitações
@@ -136,6 +138,7 @@ const menuItems: MenuProps['items'] = [
 
 export default function SideNav() {
   const [collapsed, setCollapsed] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -154,7 +157,7 @@ export default function SideNav() {
             className={collapsed ? 'p-4' : 'p-2'}
           />
         </Flex>
-        <Menu mode="inline" items={menuItems} />
+        <Menu mode="inline" items={menuItems} selectedKeys={[pathname]} />
       </Layout.Sider>
     </>
   );

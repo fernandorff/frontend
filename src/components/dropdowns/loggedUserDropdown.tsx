@@ -1,13 +1,13 @@
 import { Avatar, Button, Dropdown, Flex, MenuProps, Typography } from 'antd';
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Icon from '@ant-design/icons';
 import { BiCog, BiLogOut, BiUser } from 'react-icons/bi';
 import Link from 'next/link';
 
 const items: MenuProps['items'] = [
   {
-    key: 'meu-perfil',
+    key: '/meu-perfil',
     icon: (
       <Icon>
         <BiUser />
@@ -16,7 +16,7 @@ const items: MenuProps['items'] = [
     label: <Link href="/meu-perfil">Meu Perfil</Link>,
   },
   {
-    key: 'configuracoes-conta',
+    key: '/configuracoes-conta',
     icon: (
       <Icon>
         <BiCog />
@@ -28,7 +28,7 @@ const items: MenuProps['items'] = [
     type: 'divider',
   },
   {
-    key: 'logout',
+    key: '/logout',
     icon: (
       <Icon>
         <BiLogOut />
@@ -40,15 +40,11 @@ const items: MenuProps['items'] = [
 ];
 
 export default function LoggedUserDropdown() {
-  const router = useRouter();
-
-  function handleMenuClickNavigation(e: any) {
-    router.push(e.key);
-  }
+  const pathname = usePathname();
 
   return (
     <>
-      <Dropdown menu={{ items }}>
+      <Dropdown menu={{ items, selectable: true, selectedKeys: [pathname] }}>
         <Button size={'large'} type={'text'} className={'h-16'}>
           <Flex align={'center'} gap={'0.5rem'}>
             <Avatar

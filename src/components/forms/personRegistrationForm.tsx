@@ -28,7 +28,7 @@ export function PersonRegistrationForm() {
     {
       data: getAddressData,
       error: getAddressError,
-      isLoading: getAddressIsLoading,
+      isFetching: getAddressIsFetching,
     },
   ] = useLazyGetAddressByCepQuery();
 
@@ -42,8 +42,7 @@ export function PersonRegistrationForm() {
       if (getAddressData.erro || getAddressError) {
         notification.error({
           message: 'Não foi possível encontrar o endereço.',
-          description:
-            'Verifique se o CEP está correto ou preencha manualmente.',
+          description: 'Verifique se o CEP está correto.',
         });
       } else {
         notification.success({
@@ -69,7 +68,7 @@ export function PersonRegistrationForm() {
         name={'register'}
         scrollToFirstError
         onFinish={(values) => console.log(values)}
-        onKeyPress={(e) => {
+        onKeyDown={(e) => {
           e.key === 'Enter' && e.preventDefault();
         }}
       >
@@ -85,7 +84,6 @@ export function PersonRegistrationForm() {
                   ? 'Preencha com o CPF para buscar os dados pessoais do cadastrante'
                   : null
               }
-              rules={[{ required: true, message: 'CPF é obrigatório!' }]}
             >
               <InputMask
                 mask={CPF_MASK}
@@ -172,7 +170,7 @@ export function PersonRegistrationForm() {
                       <Button
                         disabled={
                           form.getFieldValue('cep')?.length != 9 ||
-                          getAddressIsLoading
+                          getAddressIsFetching
                         }
                       >
                         <Icon>
@@ -198,38 +196,18 @@ export function PersonRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} placeholder={'Rua ABC'} />
+              <Input disabled={true} size={'large'} placeholder={'Rua ABC'} />
             </Form.Item>
           </Col>
 
           <Col span={8}>
-            <Form.Item
-              name={'streetNumber'}
-              label={'Número'}
-              rules={[
-                {
-                  required: true,
-                  message: 'Número é obrigatório!',
-                  whitespace: true,
-                },
-              ]}
-            >
+            <Form.Item name={'streetNumber'} label={'Número'}>
               <Input size={'large'} placeholder={'123'} />
             </Form.Item>
           </Col>
 
           <Col span={8}>
-            <Form.Item
-              name={'streetComplement'}
-              label={'Complemento'}
-              rules={[
-                {
-                  required: true,
-                  message: 'Complemento é obrigatório!',
-                  whitespace: true,
-                },
-              ]}
-            >
+            <Form.Item name={'streetComplement'} label={'Complemento'}>
               <Input size={'large'} placeholder={'Bloco A Apto 01'} />
             </Form.Item>
           </Col>
@@ -246,7 +224,7 @@ export function PersonRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} placeholder={'Vila D'} />
+              <Input disabled={true} size={'large'} placeholder={'Vila D'} />
             </Form.Item>
           </Col>
 
@@ -262,7 +240,7 @@ export function PersonRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} placeholder={'Vitória'} />
+              <Input disabled={true} size={'large'} placeholder={'Vitória'} />
             </Form.Item>
           </Col>
 
@@ -278,7 +256,7 @@ export function PersonRegistrationForm() {
                 },
               ]}
             >
-              <Select size="large" placeholder="Selecione UF">
+              <Select disabled={true} size="large" placeholder="Selecione UF">
                 {federalUnits.map((state) => (
                   <Select.Option value={state.UF} key={state.UF}>
                     {`${state.name} - ${state.UF}`}
@@ -308,11 +286,7 @@ export function PersonRegistrationForm() {
           </Col>
 
           <Col span={8}>
-            <Form.Item
-              name={'phone2'}
-              label={'Telefone 2'}
-              rules={[{ required: true, message: 'Telefone 2 é obrigatório!' }]}
-            >
+            <Form.Item name={'phone2'} label={'Telefone 2'}>
               <InputMask
                 mask={BR_CELLPHONE_MASK}
                 maskChar={null}
@@ -334,10 +308,6 @@ export function PersonRegistrationForm() {
                 {
                   type: 'email',
                   message: 'Insira um Email válido!',
-                },
-                {
-                  required: true,
-                  message: 'Email é obrigatório!',
                 },
               ]}
             >
