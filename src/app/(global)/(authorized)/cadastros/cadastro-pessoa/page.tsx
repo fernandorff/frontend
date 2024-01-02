@@ -2,44 +2,49 @@
 
 import React from 'react';
 import { PersonRegistrationForm } from '@/components/forms/personRegistrationForm';
-import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs';
 import Icon from '@ant-design/icons';
 import { BiHome, BiUser, BiUserPlus } from 'react-icons/bi';
+import { Breadcrumb } from 'antd';
 
 const breadcrumbItems = [
   {
-    name: 'Home',
+    title: (
+      <>
+        <Icon>
+          <BiHome />
+        </Icon>
+        <span>Home</span>
+      </>
+    ),
     href: '/',
-    icon: (
-      <Icon>
-        <BiHome />
-      </Icon>
+  },
+  {
+    title: (
+      <>
+        <Icon>
+          <BiUserPlus />
+        </Icon>
+        <span>Cadastros</span>
+      </>
     ),
   },
   {
-    name: 'Cadastros',
-    href: '/cadastros',
-    icon: (
-      <Icon>
-        <BiUserPlus />
-      </Icon>
+    title: (
+      <>
+        <Icon>
+          <BiUser />
+        </Icon>
+        <span>Cadastro de Pessoa</span>
+      </>
     ),
-  },
-  {
-    name: 'Cadastro de Pessoa',
     href: '/cadastros/cadastro-pessoa',
-    icon: (
-      <Icon>
-        <BiUser />
-      </Icon>
-    ),
   },
 ];
 
 export default function PersonRegistrationPage() {
   return (
     <>
-      <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumb items={breadcrumbItems} />
       <PersonRegistrationForm />
     </>
   );

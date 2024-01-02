@@ -15,46 +15,58 @@ import { federalUnits } from '@/constants/_domain/federal-units';
 import { useLazyGetAddressByCepQuery } from '@/services/api/viaCepApi';
 import Icon from '@ant-design/icons';
 import { BiSearch } from 'react-icons/bi';
+import { useEffect, useState } from 'react';
 
 const InputMask = require('react-input-mask');
 
 export function PersonRegistrationForm() {
   const [form] = Form.useForm();
+  const [getAddressTrigger, setgetAddressTrigger] = useState<boolean>(false);
 
-  const [getAddressByCep, { data: addressData, error }] =
-    useLazyGetAddressByCepQuery();
+  const [
+    getAddressByCep,
+    {
+      data: getAddressData,
+      error: getAddressError,
+      isLoading: getAddressIsLoading,
+    },
+  ] = useLazyGetAddressByCepQuery();
 
   async function handleSearch() {
     await getAddressByCep(form.getFieldValue('cep'));
-    if (addressData) {
-      if (addressData.erro) {
+    setgetAddressTrigger(!getAddressTrigger);
+  }
+
+  useEffect(() => {
+    if (getAddressData) {
+      if (getAddressData.erro || getAddressError) {
         notification.error({
-          message: 'Endereço não encontrado',
-          description: null,
+          message: 'Não foi possível encontrar o endereço.',
+          description:
+            'Verifique se o CEP está correto ou preencha manualmente.',
         });
       } else {
         notification.success({
           message: 'Endereço encontrado.',
-        });
-        form.setFieldsValue({
-          streetName: addressData.logradouro,
-          neighborhood: addressData.bairro,
-          city: addressData.localidade,
-          federalUnit: addressData.uf,
+          description: 'Preencha os campos restantes.',
         });
       }
+      form.setFieldsValue({
+        streetName: getAddressData?.logradouro,
+        neighborhood: getAddressData?.bairro,
+        city: getAddressData?.localidade,
+        federalUnit: getAddressData?.uf,
+      });
     }
-  }
+  }, [getAddressTrigger]);
 
   return (
     <>
       <Form
+        className={'my-4'}
         layout={'vertical'}
         form={form}
         name={'register'}
-        initialValues={{
-          prefix: '0',
-        }}
         scrollToFirstError
         onFinish={(values) => console.log(values)}
         onKeyPress={(e) => {
@@ -157,7 +169,12 @@ export function PersonRegistrationForm() {
                     onSearch={handleSearch}
                     maxLength={9}
                     enterButton={
-                      <Button disabled={form.getFieldValue('cep')?.length != 9}>
+                      <Button
+                        disabled={
+                          form.getFieldValue('cep')?.length != 9 ||
+                          getAddressIsLoading
+                        }
+                      >
                         <Icon>
                           <BiSearch />
                         </Icon>
