@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Button, Flex, Image, Layout, Typography } from 'antd';
+import { Badge, Button, Flex, Image, Layout } from 'antd';
 import { AiOutlineMenuFold } from 'react-icons/ai';
 import Icon from '@ant-design/icons';
 import LoggedUserDropdown from '@/components/dropdowns/loggedUserDropdown';
@@ -20,10 +20,6 @@ export default function TopNav() {
             <Link href={'/'}>
               <Image width={'8rem'} preview={false} src={'/gov-es-logo.svg'} />
             </Link>
-
-            <Typography className={'text-xl text-white font-semibold'}>
-              Página atual
-            </Typography>
           </Flex>
 
           <Flex align={'center'} gap={'1rem'}>

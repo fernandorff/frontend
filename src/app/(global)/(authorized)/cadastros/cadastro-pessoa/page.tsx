@@ -5,18 +5,18 @@ import { PersonRegistrationForm } from '@/components/forms/personRegistrationFor
 import Icon from '@ant-design/icons';
 import { BiHome, BiUser, BiUserPlus } from 'react-icons/bi';
 import { Breadcrumb } from 'antd';
+import Link from 'next/link';
 
 const breadcrumbItems = [
   {
     title: (
-      <>
+      <Link href={'/'}>
         <Icon>
           <BiHome />
         </Icon>
         <span>Home</span>
-      </>
+      </Link>
     ),
-    href: '/',
   },
   {
     title: (
@@ -30,14 +30,13 @@ const breadcrumbItems = [
   },
   {
     title: (
-      <>
+      <Link href={'/cadastros/cadastro-pessoa'}>
         <Icon>
           <BiUser />
         </Icon>
         <span>Cadastro de Pessoa</span>
-      </>
+      </Link>
     ),
-    href: '/cadastros/cadastro-pessoa',
   },
 ];
 
