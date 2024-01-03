@@ -10,9 +10,13 @@ const InputMask = require('react-input-mask');
 
 type AddressFieldsSectionProps = {
   form: FormInstance;
+  spanSize?: number;
 };
 
-export function AddressFieldsSection(props: AddressFieldsSectionProps) {
+export function AddressFieldsSection({
+  form,
+  spanSize = 8,
+}: AddressFieldsSectionProps) {
   const [getAddressTrigger, setgetAddressTrigger] = useState<boolean>(false);
 
   const [
@@ -25,13 +29,13 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
   ] = useLazyGetAddressByCepQuery();
 
   async function handleSearch() {
-    await getAddressByCep(props.form.getFieldValue('cep'));
+    await getAddressByCep(form.getFieldValue('cep'));
     setgetAddressTrigger(!getAddressTrigger);
   }
 
   useEffect(() => {
     if (getAddressData) {
-      props.form.setFieldsValue({
+      form.setFieldsValue({
         streetName: getAddressData.logradouro,
         neighborhood: getAddressData.bairro,
         city: getAddressData.localidade,
@@ -42,7 +46,7 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
 
   return (
     <>
-      <Col span={8}>
+      <Col span={spanSize}>
         <Form.Item
           name={'cep'}
           label={'CEP'}
@@ -58,10 +62,8 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
           <InputMask
             mask={CEP_MASK}
             maskChar={null}
-            value={props.form.getFieldValue('cep')}
-            onChange={(e: any) =>
-              props.form.setFieldsValue({ cep: e.target.value })
-            }
+            value={form.getFieldValue('cep')}
+            onChange={(e: any) => form.setFieldsValue({ cep: e.target.value })}
           >
             {() => (
               <Input.Search
@@ -72,8 +74,8 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
                 enterButton={
                   <Button
                     disabled={
-                      props.form.getFieldValue('cep')?.length !=
-                        CEP_MASK.length || getAddressIsFetching
+                      form.getFieldValue('cep')?.length != CEP_MASK.length ||
+                      getAddressIsFetching
                     }
                   >
                     <Icon>
@@ -87,7 +89,7 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
         </Form.Item>
       </Col>
 
-      <Col span={8}>
+      <Col span={spanSize}>
         <Form.Item
           name={'streetName'}
           label={'Logradouro'}
@@ -103,19 +105,19 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
         </Form.Item>
       </Col>
 
-      <Col span={8}>
+      <Col span={spanSize}>
         <Form.Item name={'streetNumber'} label={'Número'}>
           <Input size={'large'} placeholder={'123'} />
         </Form.Item>
       </Col>
 
-      <Col span={8}>
+      <Col span={spanSize}>
         <Form.Item name={'streetComplement'} label={'Complemento'}>
           <Input size={'large'} placeholder={'Bloco A Apto 01'} />
         </Form.Item>
       </Col>
 
-      <Col span={8}>
+      <Col span={spanSize}>
         <Form.Item
           name={'neighborhood'}
           label={'Bairro'}
@@ -131,7 +133,7 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
         </Form.Item>
       </Col>
 
-      <Col span={8}>
+      <Col span={spanSize}>
         <Form.Item
           name={'city'}
           label={'Município'}
@@ -147,7 +149,7 @@ export function AddressFieldsSection(props: AddressFieldsSectionProps) {
         </Form.Item>
       </Col>
 
-      <Col span={8}>
+      <Col span={spanSize}>
         <Form.Item
           name={'federalUnit'}
           label={'UF'}

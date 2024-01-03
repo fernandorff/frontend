@@ -6,21 +6,40 @@ import LoggedUserDropdown from '@/components/dropdowns/loggedUserDropdown';
 import { BiBell, BiQuestionMark, BiSearch } from 'react-icons/bi';
 import Link from 'next/link';
 import { HOME_PATH } from '@/constants/paths/PAGE_PATHS';
+import { useBreakpoint } from '@ant-design/pro-utils';
+import { isBreakpointUp } from '@/utils/breakpointUtils';
+import { useDispatch } from 'react-redux';
+import { toggleSideNavCollapsed } from '@/services/state/redux/store/reducers/sideNavSlice';
 
 export default function TopNav() {
+  const breakpoint = useBreakpoint();
+  const dispatch = useDispatch();
+
   return (
     <>
-      <Layout.Header>
-        <Flex justify={'space-between'} align={'center'}>
+      <Layout.Header style={{ width: '100%' }}>
+        <Flex
+          justify={'space-between'}
+          align={'center'}
+          wrap={'nowrap'}
+          style={{ overflowX: 'auto' }}
+        >
           <Flex align={'center'} gap={'1.5rem'}>
             <Button
               type="text"
               icon={<AiOutlineMenuFold size={'1.5rem'} color={'white'} />}
+              onClick={() => dispatch(toggleSideNavCollapsed())}
             />
 
-            <Link href={HOME_PATH}>
-              <Image width={'8rem'} preview={false} src={'/gov-es-logo.svg'} />
-            </Link>
+            {isBreakpointUp('sm', breakpoint) && (
+              <Link href={HOME_PATH}>
+                <Image
+                  width={'8rem'}
+                  preview={false}
+                  src={'/gov-es-logo.svg'}
+                />
+              </Link>
+            )}
           </Flex>
 
           <Flex align={'center'} gap={'1rem'}>

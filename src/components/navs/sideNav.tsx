@@ -7,7 +7,7 @@ import {
   BiTrendingUp,
   BiUserPlus,
 } from 'react-icons/bi';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Icon from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
@@ -27,6 +27,15 @@ import {
   REQUESTS_PATH,
   VEHICLE_REGISTRATION_PATH,
 } from '@/constants/paths/PAGE_PATHS';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/services/state/redux/store/store';
+import {
+  setSideNavStateCollapsed,
+  toggleSideNavCollapsed,
+} from '@/services/state/redux/store/reducers/sideNavSlice';
+import { useBreakpoint } from '@ant-design/pro-utils';
+import { isBreakpointUp } from '@/utils/breakpointUtils';
+import { router } from 'next/client';
 
 const menuItems: MenuProps['items'] = [
   {
@@ -136,24 +145,36 @@ const menuItems: MenuProps['items'] = [
 ];
 
 export default function SideNav() {
-  const [collapsed, setCollapsed] = useState(false);
+  const breakpoint = useBreakpoint();
   const pathname = usePathname();
+  const dispatch = useDispatch();
+  const isCollapsed = useSelector(
+    (state: RootState) => state.sideNav.isCollapsed,
+  );
+
+  useEffect(() => {
+    dispatch(setSideNavStateCollapsed(true));
+  }, [pathname]);
 
   return (
     <>
       <Layout.Sider
         theme={'light'}
-        width={'15rem'}
+        width={isBreakpointUp('sm', breakpoint) ? '15rem' : '100%'}
         collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
+        collapsedWidth={0}
+        collapsed={isCollapsed}
+        trigger={null}
+        onCollapse={() => dispatch(toggleSideNavCollapsed())}
       >
         <Flex justify={'center'}>
           <Image
             width={'8rem'}
             preview={false}
-            src={collapsed ? '/detran-es-logo-min.svg' : '/detran-es-logo.svg'}
-            className={collapsed ? 'p-4' : 'p-2'}
+            src={
+              isCollapsed ? '/detran-es-logo-min.svg' : '/detran-es-logo.svg'
+            }
+            className={isCollapsed ? 'p-4' : 'p-2'}
           />
         </Flex>
         <Menu mode="inline" items={menuItems} selectedKeys={[pathname]} />

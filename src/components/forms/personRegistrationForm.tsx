@@ -1,11 +1,16 @@
 import { Button, Col, DatePicker, Flex, Form, Input, Row } from 'antd';
 import { BR_CELLPHONE_MASK, CPF_MASK } from '@/constants/forms/INPUT_MASKS';
 import { AddressFieldsSection } from '@/components/forms/sections/addressFieldsSection';
+import { useBreakpoint } from '@ant-design/pro-utils';
+import { isBreakpointUp } from '@/utils/breakpointUtils';
 
 const InputMask = require('react-input-mask');
 
 export function PersonRegistrationForm() {
   const [form] = Form.useForm();
+  const breakpoint = useBreakpoint();
+
+  const spanSize = isBreakpointUp('sm', breakpoint) ? 8 : 24;
 
   return (
     <>
@@ -20,7 +25,7 @@ export function PersonRegistrationForm() {
         }}
       >
         <Row gutter={[24, 0]}>
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'cpf'}
               label={'CPF'}
@@ -47,7 +52,7 @@ export function PersonRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'fullName'}
               label={'Nome Completo'}
@@ -66,7 +71,7 @@ export function PersonRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'birthDate'}
               label={'Data de Nascimento'}
@@ -86,9 +91,9 @@ export function PersonRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <AddressFieldsSection form={form} />
+          <AddressFieldsSection form={form} spanSize={spanSize} />
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'phone1'}
               label={'Telefone 1'}
@@ -107,7 +112,7 @@ export function PersonRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item name={'phone2'} label={'Telefone 2'}>
               <InputMask
                 mask={BR_CELLPHONE_MASK}
@@ -122,7 +127,7 @@ export function PersonRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'email'}
               label={'Email'}

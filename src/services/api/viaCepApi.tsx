@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IViaCepGetAddressByCepResponse } from '@/typings/response/iViaCepGetAddressByCepResponse';
 import { notification } from 'antd';
+import { NEXT_PUBLIC_VIACEP_API_URL } from '@/constants/env/environmentVariables';
 
 export const ViaCepApi = createApi({
   reducerPath: 'ViaCepApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://viacep.com.br/ws/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: NEXT_PUBLIC_VIACEP_API_URL }),
   endpoints: (builder) => ({
     getAddressByCep: builder.query({
       query: (cep) => `${cep}/json/`,

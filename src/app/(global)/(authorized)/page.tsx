@@ -20,7 +20,7 @@ export default function HomePage() {
         veículos.
       </Typography.Paragraph>
 
-      <Space>
+      <Space wrap>
         <Link href={ENTITY_REGISTRATION_PATH}>
           <Button
             size={'large'}
