@@ -1,4 +1,4 @@
-export const federalUnits = [
+export const FEDERAL_UNITS = [
   { UF: 'AC', name: 'Acre' },
   { UF: 'AL', name: 'Alagoas' },
   { UF: 'AP', name: 'Amapá' },

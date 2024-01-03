@@ -1,10 +1,15 @@
-import { Button, Col, DatePicker, Flex, Form, Input, Row } from 'antd';
-import { BR_CELLPHONE_MASK, CPF_MASK } from '@/constants/forms/INPUT_MASKS';
+import { Button, Col, DatePicker, Flex, Form, Input, Row, Select } from 'antd';
+import {
+  BR_CELLPHONE_MASK,
+  CNPJ_MASK,
+  CPF_MASK,
+} from '@/constants/forms/INPUT_MASKS';
+import { ENTITIES } from '@/constants/_domain/ENTITIES';
 import { AddressFieldsSection } from '@/components/forms/sections/addressFieldsSection';
 
 const InputMask = require('react-input-mask');
 
-export function PersonRegistrationForm() {
+export function EntityRegistrationForm() {
   const [form] = Form.useForm();
 
   return (
@@ -20,6 +25,85 @@ export function PersonRegistrationForm() {
         }}
       >
         <Row gutter={[24, 0]}>
+          <Col span={8}>
+            <Form.Item
+              name={'entity'}
+              label={'Entidade'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Entidade é obrigatória!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Select size="large" placeholder="Selecione a entidade">
+                {ENTITIES.map((state) => (
+                  <Select.Option value={state.name} key={state.name}>
+                    {`${state.name}`}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+
+          <Col span={8}>
+            <Form.Item
+              name={'cnpj'}
+              label={'CNPJ'}
+              extra={'Preencha com o CNPJ da entidade'}
+            >
+              <InputMask
+                mask={CNPJ_MASK}
+                maskChar={null}
+                value={form.getFieldValue('cnpj')}
+                onChange={(e: any) =>
+                  form.setFieldsValue({ cnpj: e.target.value })
+                }
+              >
+                {() => (
+                  <Input
+                    size={'large'}
+                    placeholder={CNPJ_MASK}
+                    maxLength={CNPJ_MASK.length}
+                  />
+                )}
+              </InputMask>
+            </Form.Item>
+          </Col>
+
+          <Col span={8}>
+            <Form.Item
+              name={'corporateReason'}
+              label={'Razão Social'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Razão Social é obrigatório!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input size={'large'} />
+            </Form.Item>
+          </Col>
+
+          <Col span={8}>
+            <Form.Item
+              name={'fantasyName'}
+              label={'Nome Fantasia'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Nome Fantasia é obrigatório!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input size={'large'} />
+            </Form.Item>
+          </Col>
+
           <Col span={8}>
             <Form.Item
               name={'cpf'}
@@ -49,32 +133,13 @@ export function PersonRegistrationForm() {
 
           <Col span={8}>
             <Form.Item
-              name={'fullName'}
-              label={'Nome Completo'}
-              rules={[
-                {
-                  required: true,
-                  message: 'Nome é obrigatório!',
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Input
-                size={'large'}
-                placeholder={'José Ricardo Almeida Santos'}
-              />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item
-              name={'birthDate'}
-              label={'Data de Nascimento'}
+              name={'requestDate'}
+              label={'Data de Solicitação'}
               rules={[
                 {
                   type: 'object' as const,
                   required: true,
-                  message: 'Data de nascimento é obrigatória!',
+                  message: 'Data de Solicitação é obrigatória!',
                 },
               ]}
             >

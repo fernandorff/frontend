@@ -2,6 +2,6 @@
 
 import React from 'react';
 
-export default function AccreditPersonPage() {
+export default function PersonAccreditationPage() {
   return <h1>Credenciar Pessoa</h1>;
 }

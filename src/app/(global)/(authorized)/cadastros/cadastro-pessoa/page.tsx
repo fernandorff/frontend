@@ -4,37 +4,41 @@ import React from 'react';
 import { PersonRegistrationForm } from '@/components/forms/personRegistrationForm';
 import Icon from '@ant-design/icons';
 import { BiHome, BiUser, BiUserPlus } from 'react-icons/bi';
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Typography } from 'antd';
 import Link from 'next/link';
+import {
+  HOME_PATH,
+  PERSON_REGISTRATION_PATH,
+} from '@/constants/paths/PAGE_PATHS';
 
 const breadcrumbItems = [
   {
     title: (
-      <Link href={'/'}>
-        <Icon>
+      <Link href={HOME_PATH}>
+        <Icon className={'me-1'}>
           <BiHome />
         </Icon>
-        <span>Home</span>
+        Home
       </Link>
     ),
   },
   {
     title: (
       <>
-        <Icon>
+        <Icon className={'me-1'}>
           <BiUserPlus />
         </Icon>
-        <span>Cadastros</span>
+        Cadastros
       </>
     ),
   },
   {
     title: (
-      <Link href={'/cadastros/cadastro-pessoa'}>
-        <Icon>
+      <Link href={PERSON_REGISTRATION_PATH}>
+        <Icon className={'me-1'}>
           <BiUser />
         </Icon>
-        <span>Cadastro de Pessoa</span>
+        Cadastro de Pessoa
       </Link>
     ),
   },
@@ -43,7 +47,10 @@ const breadcrumbItems = [
 export default function PersonRegistrationPage() {
   return (
     <>
-      <Breadcrumb items={breadcrumbItems} />
+      <Breadcrumb className={'mb-4'} items={breadcrumbItems} />
+      <Typography.Title className={'mb-6'} level={4}>
+        Cadastro de Pessoa
+      </Typography.Title>
       <PersonRegistrationForm />
     </>
   );

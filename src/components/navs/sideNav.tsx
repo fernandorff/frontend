@@ -11,19 +11,35 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Icon from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
+import {
+  ACCREDITATION_PATH,
+  ASSOCIATE_PROFESSIONALS_PATH,
+  ENTITY_ACCREDITATION_PATH,
+  ENTITY_REGISTRATION_PATH,
+  HOME_PATH,
+  LIST_REQUESTS_PATH,
+  PERSON_ACCREDITATION_PATH,
+  PERSON_REGISTRATION_PATH,
+  PROFESSIONALS_PATH,
+  REGISTRATIONS_PATH,
+  REPORTS_PATH,
+  REQUESTS_HISTORY_PATH,
+  REQUESTS_PATH,
+  VEHICLE_REGISTRATION_PATH,
+} from '@/constants/paths/PAGE_PATHS';
 
 const menuItems: MenuProps['items'] = [
   {
-    key: '/',
+    key: HOME_PATH,
     icon: (
       <Icon>
         <BiHome />
       </Icon>
     ),
-    label: <Link href="/">Home</Link>,
+    label: <Link href={HOME_PATH}>Home</Link>,
   },
   {
-    key: '/cadastros',
+    key: REGISTRATIONS_PATH,
     icon: (
       <Icon>
         <BiUserPlus />
@@ -32,25 +48,21 @@ const menuItems: MenuProps['items'] = [
     label: 'Cadastros',
     children: [
       {
-        key: '/cadastros/cadastro-pessoa',
-        label: <Link href="/cadastros/cadastro-pessoa">Cadastrar Pessoa</Link>,
+        key: PERSON_REGISTRATION_PATH,
+        label: <Link href={PERSON_REGISTRATION_PATH}>Cadastrar Pessoa</Link>,
       },
       {
-        key: '/cadastros/cadastro-entidade',
-        label: (
-          <Link href="/cadastros/cadastro-entidade">Cadastrar Entidade</Link>
-        ),
+        key: ENTITY_REGISTRATION_PATH,
+        label: <Link href={ENTITY_REGISTRATION_PATH}>Cadastrar Entidade</Link>,
       },
       {
-        key: '/cadastros/cadastro-veiculo',
-        label: (
-          <Link href="/cadastros/cadastro-veiculo">Cadastrar Veículo</Link>
-        ),
+        key: VEHICLE_REGISTRATION_PATH,
+        label: <Link href={VEHICLE_REGISTRATION_PATH}>Cadastrar Veículo</Link>,
       },
     ],
   },
   {
-    key: '/profissionais',
+    key: PROFESSIONALS_PATH,
     icon: (
       <Icon>
         <BiBriefcase />
@@ -59,9 +71,9 @@ const menuItems: MenuProps['items'] = [
     label: 'Profissionais',
     children: [
       {
-        key: '/profissionais/associar-profissionais',
+        key: ASSOCIATE_PROFESSIONALS_PATH,
         label: (
-          <Link href="/profissionais/associar-profissionais">
+          <Link href={ASSOCIATE_PROFESSIONALS_PATH}>
             Associar Profissionais
           </Link>
         ),
@@ -69,7 +81,7 @@ const menuItems: MenuProps['items'] = [
     ],
   },
   {
-    key: '/credenciamento',
+    key: ACCREDITATION_PATH,
     icon: (
       <Icon>
         <BiIdCard />
@@ -78,25 +90,19 @@ const menuItems: MenuProps['items'] = [
     label: 'Credenciamento',
     children: [
       {
-        key: '/credenciamento/credenciar-pessoa',
-        label: (
-          <Link href="/credenciamento/credenciar-pessoa">
-            Credenciar Pessoa
-          </Link>
-        ),
+        key: PERSON_ACCREDITATION_PATH,
+        label: <Link href={PERSON_ACCREDITATION_PATH}>Credenciar Pessoa</Link>,
       },
       {
-        key: '/credenciamento/credenciar-entidade',
+        key: ENTITY_ACCREDITATION_PATH,
         label: (
-          <Link href="/credenciamento/credenciar-entidade">
-            Credenciar Entidade
-          </Link>
+          <Link href={ENTITY_ACCREDITATION_PATH}>Credenciar Entidade</Link>
         ),
       },
     ],
   },
   {
-    key: '/solicitacoes',
+    key: REQUESTS_PATH,
     icon: (
       <Icon>
         <BiTable />
@@ -105,17 +111,13 @@ const menuItems: MenuProps['items'] = [
     label: 'Solicitações',
     children: [
       {
-        key: '/solicitacoes/listar-solicitacoes',
-        label: (
-          <Link href="/solicitacoes/listar-solicitacoes">
-            Listar Solicitações
-          </Link>
-        ),
+        key: LIST_REQUESTS_PATH,
+        label: <Link href={LIST_REQUESTS_PATH}>Listar Solicitações</Link>,
       },
     ],
   },
   {
-    key: '/relatorios',
+    key: REPORTS_PATH,
     icon: (
       <Icon>
         <BiTrendingUp />
@@ -124,11 +126,9 @@ const menuItems: MenuProps['items'] = [
     label: 'Relatórios',
     children: [
       {
-        key: '/relatorios/historico-solicitacoes',
+        key: REQUESTS_HISTORY_PATH,
         label: (
-          <Link href="/relatorios/historico-solicitacoes">
-            Histórico de Solicitações
-          </Link>
+          <Link href={REQUESTS_HISTORY_PATH}>Histórico de Solicitações</Link>
         ),
       },
     ],

@@ -5,6 +5,7 @@ import Icon from '@ant-design/icons';
 import LoggedUserDropdown from '@/components/dropdowns/loggedUserDropdown';
 import { BiBell, BiQuestionMark, BiSearch } from 'react-icons/bi';
 import Link from 'next/link';
+import { HOME_PATH } from '@/constants/paths/PAGE_PATHS';
 
 export default function TopNav() {
   return (
@@ -17,7 +18,7 @@ export default function TopNav() {
               icon={<AiOutlineMenuFold size={'1.5rem'} color={'white'} />}
             />
 
-            <Link href={'/'}>
+            <Link href={HOME_PATH}>
               <Image width={'8rem'} preview={false} src={'/gov-es-logo.svg'} />
             </Link>
           </Flex>

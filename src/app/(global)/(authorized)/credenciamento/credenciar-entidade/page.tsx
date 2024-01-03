@@ -2,6 +2,6 @@
 
 import React from 'react';
 
-export default function AccreditEntityPage() {
+export default function EntityAccreditationPage() {
   return <h1>Credenciar Entidade</h1>;
 }

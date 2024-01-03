@@ -4,37 +4,42 @@ import { usePathname } from 'next/navigation';
 import Icon from '@ant-design/icons';
 import { BiCog, BiLogOut, BiUser } from 'react-icons/bi';
 import Link from 'next/link';
+import {
+  ACCOUNT_SETTINGS_PATH,
+  LOGOUT_PATH,
+  MY_PROFILE_PATH,
+} from '@/constants/paths/PAGE_PATHS';
 
 const items: MenuProps['items'] = [
   {
-    key: '/meu-perfil',
+    key: MY_PROFILE_PATH,
     icon: (
       <Icon>
         <BiUser />
       </Icon>
     ),
-    label: <Link href="/meu-perfil">Meu Perfil</Link>,
+    label: <Link href={MY_PROFILE_PATH}>Meu Perfil</Link>,
   },
   {
-    key: '/configuracoes-conta',
+    key: ACCOUNT_SETTINGS_PATH,
     icon: (
       <Icon>
         <BiCog />
       </Icon>
     ),
-    label: <Link href="/configuracoes-conta">Configurações da conta</Link>,
+    label: <Link href={ACCOUNT_SETTINGS_PATH}>Configurações da conta</Link>,
   },
   {
     type: 'divider',
   },
   {
-    key: '/logout',
+    key: LOGOUT_PATH,
     icon: (
       <Icon>
         <BiLogOut />
       </Icon>
     ),
-    label: <Link href="/logout">Logout</Link>,
+    label: <Link href={LOGOUT_PATH}>Logout</Link>,
     danger: true,
   },
 ];

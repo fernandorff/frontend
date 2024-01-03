@@ -5,6 +5,11 @@ import { Button, Space, Typography } from 'antd';
 import { BiCar, BiStore, BiUser } from 'react-icons/bi';
 import Icon from '@ant-design/icons';
 import Link from 'next/link';
+import {
+  ENTITY_REGISTRATION_PATH,
+  PERSON_REGISTRATION_PATH,
+  VEHICLE_REGISTRATION_PATH,
+} from '@/constants/paths/PAGE_PATHS';
 
 export default function HomePage() {
   return (
@@ -16,7 +21,7 @@ export default function HomePage() {
       </Typography.Paragraph>
 
       <Space>
-        <Link href={'/cadastros/cadastro-entidade'}>
+        <Link href={ENTITY_REGISTRATION_PATH}>
           <Button
             size={'large'}
             icon={
@@ -28,7 +33,7 @@ export default function HomePage() {
             Cadastrar Entidade
           </Button>
         </Link>
-        <Link href={'/cadastros/cadastro-pessoa'}>
+        <Link href={PERSON_REGISTRATION_PATH}>
           <Button
             size={'large'}
             icon={
@@ -40,7 +45,7 @@ export default function HomePage() {
             Cadastrar Pessoa
           </Button>
         </Link>
-        <Link href={'/cadastros/cadastro-veiculo'}>
+        <Link href={VEHICLE_REGISTRATION_PATH}>
           <Button
             size={'large'}
             icon={
