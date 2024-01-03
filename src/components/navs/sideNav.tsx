@@ -171,10 +171,8 @@ export default function SideNav() {
           <Image
             width={'8rem'}
             preview={false}
-            src={
-              isCollapsed ? '/detran-es-logo-min.svg' : '/detran-es-logo.svg'
-            }
-            className={isCollapsed ? 'p-4' : 'p-2'}
+            src={'/detran-es-logo.svg'}
+            className={'p-2'}
           />
         </Flex>
         <Menu mode="inline" items={menuItems} selectedKeys={[pathname]} />

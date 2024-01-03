@@ -21,7 +21,7 @@ export default function HomeLayout({
   const mobileMode = isSideNavCollapsed || isBreakpointUp('sm', breakpoint);
 
   return (
-    <Layout style={{ minHeight: '100dvh' }}>
+    <Layout style={{ height: '100vh' }}>
       <TopNav />
       <Layout>
         <SideNav />
@@ -30,7 +30,6 @@ export default function HomeLayout({
             overflow: 'auto',
             // width: '100%',
             minHeight: '0',
-            minWidth: '0',
           }}
           className={mobileMode ? 'p-4' : ''}
         >
