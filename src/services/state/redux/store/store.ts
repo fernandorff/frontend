@@ -1,9 +1,5 @@
-import tokenReducer from '@/services/state/redux/store/reducers/tokenSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import toggleSidebarReducer from '@/services/state/redux/store/reducers/toggleSidebarSlice';
 import sideNavReducer from '@/services/state/redux/store/reducers/sideNavSlice';
-import alertsReducer from '@/services/state/redux/store/reducers/alertsSlice';
-import progressBarReducer from '@/services/state/redux/store/reducers/progressBarSlice';
 import {
   FLUSH,
   PAUSE,
@@ -27,10 +23,6 @@ const rootReducer = combineReducers({
   [PersonsApi.reducerPath]: PersonsApi.reducer,
   [ViaCepApi.reducerPath]: ViaCepApi.reducer,
   sideNav: sideNavReducer,
-  toggleSidebar: toggleSidebarReducer,
-  token: tokenReducer,
-  alerts: alertsReducer,
-  progressBar: progressBarReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

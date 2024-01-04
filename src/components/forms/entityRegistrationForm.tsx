@@ -40,9 +40,9 @@ export function EntityRegistrationForm() {
               ]}
             >
               <Select size="large" placeholder="Selecione a entidade">
-                {ENTITIES.map((state) => (
-                  <Select.Option value={state.name} key={state.name}>
-                    {`${state.name}`}
+                {ENTITIES.map((entity) => (
+                  <Select.Option value={entity.name} key={entity.name}>
+                    {`${entity.name}`}
                   </Select.Option>
                 ))}
               </Select>
