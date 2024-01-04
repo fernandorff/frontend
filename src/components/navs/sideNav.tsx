@@ -26,7 +26,7 @@ import {
   REQUESTS_HISTORY_PATH,
   REQUESTS_PATH,
   VEHICLE_REGISTRATION_PATH,
-} from '@/constants/paths/PAGE_PATHS';
+} from '@/constants/nav/PAGE_PATHS';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/services/state/redux/store/store';
 import {
@@ -159,6 +159,7 @@ export default function SideNav() {
   return (
     <>
       <Layout.Sider
+        className={'shadow'}
         theme={'light'}
         width={screenSize == SMALL ? '100%' : '15rem'}
         collapsible

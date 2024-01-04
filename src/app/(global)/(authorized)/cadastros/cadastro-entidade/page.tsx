@@ -9,7 +9,7 @@ import { EntityRegistrationForm } from '@/components/forms/entityRegistrationFor
 import {
   ENTITY_REGISTRATION_PATH,
   HOME_PATH,
-} from '@/constants/paths/PAGE_PATHS';
+} from '@/constants/nav/PAGE_PATHS';
 
 const breadcrumbItems = [
   {

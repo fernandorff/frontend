@@ -17,7 +17,6 @@ export default function HomeLayout({
   const isSideNavCollapsed = useSelector(
     (state: RootState) => state.sideNav.isCollapsed,
   );
-  // const mobileMode = isSideNavCollapsed || isBreakpointUp('sm', breakpoint);
 
   return (
     <Layout style={{ height: '100vh' }}>
@@ -27,7 +26,7 @@ export default function HomeLayout({
         <Layout.Content
           style={{
             overflow: 'auto',
-            minHeight: '0',
+            // minHeight: '0',
           }}
           className={screenSize !== SMALL || isSideNavCollapsed ? 'p-4' : ''}
         >

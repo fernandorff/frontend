@@ -5,20 +5,18 @@ import Icon from '@ant-design/icons';
 import LoggedUserDropdown from '@/components/dropdowns/loggedUserDropdown';
 import { BiBell, BiQuestionMark, BiSearch } from 'react-icons/bi';
 import Link from 'next/link';
-import { HOME_PATH } from '@/constants/paths/PAGE_PATHS';
-import { useBreakpoint } from '@ant-design/pro-utils';
+import { HOME_PATH } from '@/constants/nav/PAGE_PATHS';
 import { useDispatch } from 'react-redux';
 import { toggleSideNavCollapsed } from '@/services/state/redux/store/reducers/sideNavSlice';
 import { SMALL, useScreenSize } from '@/hooks/layout/useScreenSize';
 
 export default function TopNav() {
-  const breakpoint = useBreakpoint();
   const dispatch = useDispatch();
   const screenSize = useScreenSize();
 
   return (
     <>
-      <Layout.Header style={{ width: '100%' }}>
+      <Layout.Header className={'drop-shadow-lg'}>
         <Flex
           justify={'space-between'}
           align={'center'}

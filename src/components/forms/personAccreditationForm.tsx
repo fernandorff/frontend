@@ -176,7 +176,7 @@ export function PersonAccreditationForm() {
                 },
               ]}
             >
-              <Input size={'large'} />
+              <Input placeholder={'Razão Social'} size={'large'} />
             </Form.Item>
           </Col>
 

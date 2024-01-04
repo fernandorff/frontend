@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IPerson } from '@/typings/interfaces/IPerson';
-import { API_URL } from '@/constants/env/environmentVariables';
+import { API_URL } from '@/constants/env/ENV';
 
 const PERSON_URL = 'person';
 

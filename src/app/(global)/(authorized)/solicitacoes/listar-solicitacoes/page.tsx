@@ -5,7 +5,7 @@ import React from 'react';
 import Icon from '@ant-design/icons';
 import { BiHome, BiUser, BiUserPlus } from 'react-icons/bi';
 import { Breadcrumb, Typography } from 'antd';
-import { HOME_PATH, LIST_REQUESTS_PATH } from '@/constants/paths/PAGE_PATHS';
+import { HOME_PATH, LIST_REQUESTS_PATH } from '@/constants/nav/PAGE_PATHS';
 
 const breadcrumbItems = [
   {

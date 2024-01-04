@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {
   HOME_PATH,
   PERSON_REGISTRATION_PATH,
-} from '@/constants/paths/PAGE_PATHS';
+} from '@/constants/nav/PAGE_PATHS';
 import Icon from '@ant-design/icons';
 import {
   BiFileBlank,

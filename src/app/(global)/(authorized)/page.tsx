@@ -9,7 +9,7 @@ import {
   ENTITY_REGISTRATION_PATH,
   PERSON_REGISTRATION_PATH,
   VEHICLE_REGISTRATION_PATH,
-} from '@/constants/paths/PAGE_PATHS';
+} from '@/constants/nav/PAGE_PATHS';
 
 export default function HomePage() {
   return (

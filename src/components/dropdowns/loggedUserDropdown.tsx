@@ -8,7 +8,8 @@ import {
   ACCOUNT_SETTINGS_PATH,
   LOGOUT_PATH,
   MY_PROFILE_PATH,
-} from '@/constants/paths/PAGE_PATHS';
+} from '@/constants/nav/PAGE_PATHS';
+import { useScreenSize } from '@/hooks/layout/useScreenSize';
 
 const items: MenuProps['items'] = [
   {
@@ -46,6 +47,7 @@ const items: MenuProps['items'] = [
 
 export default function LoggedUserDropdown() {
   const pathname = usePathname();
+  const screenSize = useScreenSize();
 
   return (
     <>
@@ -61,9 +63,11 @@ export default function LoggedUserDropdown() {
               shape={'circle'}
               src={'/user-avatar-mockup.svg'}
             />
-            <Typography.Text className={'text-white'}>
-              Deltrano Santos
-            </Typography.Text>
+            {screenSize !== 'small' && (
+              <Typography.Text className={'text-white'}>
+                Deltrano Santos
+              </Typography.Text>
+            )}
           </Flex>
         </Button>
       </Dropdown>
