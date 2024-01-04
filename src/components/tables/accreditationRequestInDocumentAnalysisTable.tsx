@@ -5,45 +5,45 @@ import Icon from '@ant-design/icons';
 import { BiEdit, BiPrinter, BiShow } from 'react-icons/bi';
 
 const ViewButton = () => (
-  <Button icon={<Icon component={BiShow} />}>{Actions.Visualizar}</Button>
+  <Button icon={<Icon component={BiShow} />}>{Actions.View}</Button>
 );
 
 const PrintInvoiceButton = () => (
   <Button icon={<Icon component={BiPrinter} />} type="dashed">
-    {Actions.EmitirBoleto}
+    {Actions.IssueInvoice}
   </Button>
 );
 
 const EditButton = () => (
   <Button icon={<Icon component={BiEdit} />} type="primary">
-    {Actions.Editar}
+    {Actions.Edit}
   </Button>
 );
 
 const LegalDecisionTag = () => (
   <Tag color="volcano" bordered>
-    {Actions.DecisaoJuridica}
+    {Actions.JudicialDecision}
   </Tag>
 );
 
 enum Status {
-  Aprovado = 1,
-  EmAnalise,
-  Bloqueado,
+  Approved = 1,
+  InAnalysis,
+  Blocked,
 }
+
+const StatusData = {
+  [Status.Approved]: { color: 'green', text: 'Aprovado' },
+  [Status.InAnalysis]: { color: 'orange', text: 'Em Análise' },
+  [Status.Blocked]: { color: 'red', text: 'Bloqueado' },
+};
 
 enum Actions {
-  Visualizar = 'Visualizar',
-  EmitirBoleto = 'Emitir Boleto',
-  Editar = 'Editar',
-  DecisaoJuridica = 'Decisão Jurídica',
+  View = 'View',
+  IssueInvoice = 'Emitir Boleto',
+  Edit = 'Edit',
+  JudicialDecision = 'Decisão Jurídica',
 }
-
-const StatusColor = {
-  [Status.Aprovado]: 'green',
-  [Status.EmAnalise]: 'orange',
-  [Status.Bloqueado]: 'red',
-};
 
 interface DataType {
   key: React.Key;
@@ -60,7 +60,11 @@ const columns: ColumnsType<DataType> = [
     title: 'Status',
     dataIndex: 'status',
     render: (status: Status) => (
-      <Badge color={StatusColor[status]} text={Status[status]} />
+      <Badge
+        color={StatusData[status].color}
+        text={StatusData[status].text}
+        style={{ whiteSpace: 'nowrap' }}
+      />
     ),
   },
   {
@@ -68,20 +72,20 @@ const columns: ColumnsType<DataType> = [
     key: 'actions',
     render: (_, record: DataType) => {
       switch (record.status) {
-        case Status.Aprovado:
+        case Status.Approved:
           return (
             <Space size="middle">
               <ViewButton />
               <PrintInvoiceButton />
             </Space>
           );
-        case Status.EmAnalise:
+        case Status.InAnalysis:
           return (
             <Space size="middle">
               <ViewButton />
             </Space>
           );
-        case Status.Bloqueado:
+        case Status.Blocked:
           return (
             <Space size="middle">
               <EditButton />

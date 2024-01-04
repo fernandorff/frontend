@@ -5,7 +5,7 @@ import { NEUTRAL_COLORS } from '@/constants/colors/NEUTRAL_COLORS';
 export const rootTheme: ThemeConfig = {
   components: {
     Badge: {
-      colorBorderBg: NEUTRAL_COLORS.transparent, // cor transparente
+      colorBorderBg: NEUTRAL_COLORS.transparent,
     },
     DatePicker: {
       controlHeightLG: 50,
