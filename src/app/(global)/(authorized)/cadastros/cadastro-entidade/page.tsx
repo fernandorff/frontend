@@ -5,11 +5,11 @@ import { Breadcrumb, Flex, Typography } from 'antd';
 import Link from 'next/link';
 import Icon from '@ant-design/icons';
 import { BiHome, BiUser, BiUserPlus } from 'react-icons/bi';
-import { EntityRegistrationForm } from '@/components/forms/entityRegistrationForm';
 import {
   ENTITY_REGISTRATION_PATH,
   HOME_PATH,
 } from '@/constants/nav/PAGE_PATHS';
+import EntityRegistrationForm from '@/components/forms/entityRegistrationForm';
 
 const breadcrumbItems = [
   {
@@ -46,12 +46,10 @@ const breadcrumbItems = [
 
 export default function EntityRegistrationPage() {
   return (
-    <>
-      <Flex vertical gap={'0.5rem'}>
-        <Breadcrumb items={breadcrumbItems} />
-        <Typography.Title level={4}>Cadastro de entidade</Typography.Title>
-        <EntityRegistrationForm />
-      </Flex>
-    </>
+    <Flex vertical gap={'0.5rem'}>
+      <Breadcrumb items={breadcrumbItems} />
+      <Typography.Title level={4}>Cadastro de entidade</Typography.Title>
+      <EntityRegistrationForm />
+    </Flex>
   );
 }

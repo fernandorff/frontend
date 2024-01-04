@@ -13,24 +13,20 @@ type AddressFieldsSectionProps = {
   spanSize?: number;
 };
 
-export function AddressFieldsSection({
+export default function AddressFieldsSection({
   form,
   spanSize = 8,
-}: AddressFieldsSectionProps) {
-  const [getAddressTrigger, setgetAddressTrigger] = useState<boolean>(false);
+}: Readonly<AddressFieldsSectionProps>) {
+  const [getAddressTrigger, setGetAddressTrigger] = useState<boolean>(false);
 
   const [
     getAddressByCep,
-    {
-      data: getAddressData,
-      error: getAddressError,
-      isFetching: getAddressIsFetching,
-    },
+    { data: getAddressData, isFetching: getAddressIsFetching },
   ] = useLazyGetAddressByCepQuery();
 
   async function handleSearch() {
     await getAddressByCep(form.getFieldValue('cep'));
-    setgetAddressTrigger(!getAddressTrigger);
+    setGetAddressTrigger(!getAddressTrigger);
   }
 
   useEffect(() => {

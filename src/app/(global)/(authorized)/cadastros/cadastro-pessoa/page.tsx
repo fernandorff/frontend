@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { PersonRegistrationForm } from '@/components/forms/personRegistrationForm';
 import Icon from '@ant-design/icons';
 import { BiHome, BiUser, BiUserPlus } from 'react-icons/bi';
 import { Breadcrumb, Flex, Typography } from 'antd';
@@ -10,6 +9,7 @@ import {
   HOME_PATH,
   PERSON_REGISTRATION_PATH,
 } from '@/constants/nav/PAGE_PATHS';
+import PersonRegistrationForm from '@/components/forms/personRegistrationForm';
 
 const breadcrumbItems = [
   {
@@ -46,12 +46,10 @@ const breadcrumbItems = [
 
 export default function PersonRegistrationPage() {
   return (
-    <>
-      <Flex vertical gap={'0.5rem'}>
-        <Breadcrumb items={breadcrumbItems} />
-        <Typography.Title level={4}>Cadastro de Pessoa</Typography.Title>
-        <PersonRegistrationForm />
-      </Flex>
-    </>
+    <Flex vertical gap={'0.5rem'}>
+      <Breadcrumb items={breadcrumbItems} />
+      <Typography.Title level={4}>Cadastro de Pessoa</Typography.Title>
+      <PersonRegistrationForm />
+    </Flex>
   );
 }

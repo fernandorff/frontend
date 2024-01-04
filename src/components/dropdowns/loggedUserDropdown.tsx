@@ -50,27 +50,25 @@ export default function LoggedUserDropdown() {
   const screenSize = useScreenSize();
 
   return (
-    <>
-      <Dropdown
-        menu={{ items, selectable: true, selectedKeys: [pathname] }}
-        placement={'bottomLeft'}
-      >
-        <Button size={'large'} type={'text'} className={'h-16'}>
-          <Flex align={'center'} gap={'0.5rem'}>
-            <Avatar
-              size={'default'}
-              className={'cursor-pointer'}
-              shape={'circle'}
-              src={'/user-avatar-mockup.svg'}
-            />
-            {screenSize !== 'small' && (
-              <Typography.Text className={'text-white'}>
-                Deltrano Santos
-              </Typography.Text>
-            )}
-          </Flex>
-        </Button>
-      </Dropdown>
-    </>
+    <Dropdown
+      menu={{ items, selectable: true, selectedKeys: [pathname] }}
+      placement={'bottomLeft'}
+    >
+      <Button size={'large'} type={'text'} className={'h-16'}>
+        <Flex align={'center'} gap={'0.5rem'}>
+          <Avatar
+            size={'default'}
+            className={'cursor-pointer'}
+            shape={'circle'}
+            src={'/user-avatar-mockup.svg'}
+          />
+          {screenSize !== 'small' && (
+            <Typography.Text className={'text-white'}>
+              Deltrano Santos
+            </Typography.Text>
+          )}
+        </Flex>
+      </Button>
+    </Dropdown>
   );
 }

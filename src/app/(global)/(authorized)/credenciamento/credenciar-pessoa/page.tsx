@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PersonAccreditationForm } from '@/components/forms/personAccreditationForm';
 import Link from 'next/link';
 import {
   HOME_PATH,
@@ -16,6 +15,7 @@ import {
   BiUserPlus,
 } from 'react-icons/bi';
 import { Breadcrumb, Flex, Steps, Typography } from 'antd';
+import PersonAccreditationForm from '@/components/forms/personAccreditationForm';
 
 const breadcrumbItems = [
   {
@@ -59,49 +59,47 @@ export default function PersonAccreditationPage() {
   };
 
   return (
-    <>
-      <Flex vertical gap={'0.5rem'}>
-        <Breadcrumb items={breadcrumbItems} />
-        <Flex vertical>
-          <Typography.Title level={4}>Credenciar Pessoa</Typography.Title>
-          <Typography.Text>
-            Comece seu processo de credenciamento cadastrando pessoas, entidades
-            e veículos.
-          </Typography.Text>
-        </Flex>
-        <Steps
-          type="navigation"
-          size="small"
-          current={current}
-          onChange={onChange}
-          items={[
-            {
-              title: 'Informações Básicas',
-              status: current == 0 ? 'process' : 'wait',
-              icon: (
-                <Icon>
-                  <BiListCheck />
-                </Icon>
-              ),
-            },
-            {
-              title: 'Documentação',
-              status: current == 1 ? 'process' : 'wait',
-              icon: (
-                <Icon>
-                  <BiFileBlank />
-                </Icon>
-              ),
-            },
-          ]}
-        />
-        <div style={{ display: current === 0 ? 'block' : 'none' }}>
-          <PersonAccreditationForm />
-        </div>
-        <div style={{ display: current === 1 ? 'block' : 'none' }}>
-          <h1>Docs</h1>
-        </div>
+    <Flex vertical gap={'0.5rem'}>
+      <Breadcrumb items={breadcrumbItems} />
+      <Flex vertical>
+        <Typography.Title level={4}>Credenciar Pessoa</Typography.Title>
+        <Typography.Text type="secondary">
+          Comece seu processo de credenciamento cadastrando pessoas, entidades e
+          veículos.
+        </Typography.Text>
       </Flex>
-    </>
+      <Steps
+        type="navigation"
+        size="small"
+        current={current}
+        onChange={onChange}
+        items={[
+          {
+            title: 'Informações Básicas',
+            status: current == 0 ? 'process' : 'wait',
+            icon: (
+              <Icon>
+                <BiListCheck />
+              </Icon>
+            ),
+          },
+          {
+            title: 'Documentação',
+            status: current == 1 ? 'process' : 'wait',
+            icon: (
+              <Icon>
+                <BiFileBlank />
+              </Icon>
+            ),
+          },
+        ]}
+      />
+      <div style={{ display: current === 0 ? 'block' : 'none' }}>
+        <PersonAccreditationForm />
+      </div>
+      <div style={{ display: current === 1 ? 'block' : 'none' }}>
+        <h1>Documentação</h1>
+      </div>
+    </Flex>
   );
 }

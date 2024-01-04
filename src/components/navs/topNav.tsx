@@ -15,69 +15,63 @@ export default function TopNav() {
   const screenSize = useScreenSize();
 
   return (
-    <>
-      <Layout.Header className={'drop-shadow-lg'}>
-        <Flex
-          justify={'space-between'}
-          align={'center'}
-          wrap={'nowrap'}
-          style={{ overflowX: 'auto' }}
-        >
-          <Flex align={'center'} gap={'1.5rem'}>
-            <Button
-              type="text"
-              icon={<AiOutlineMenuFold size={'1.5rem'} color={'white'} />}
-              onClick={() => dispatch(toggleSideNavCollapsed())}
-            />
+    <Layout.Header className={'drop-shadow'}>
+      <Flex
+        justify={'space-between'}
+        align={'center'}
+        wrap={'nowrap'}
+        style={{ overflowX: 'auto' }}
+      >
+        <Flex align={'center'} gap={'1.5rem'}>
+          <Button
+            type="text"
+            icon={<AiOutlineMenuFold size={'1.5rem'} color={'white'} />}
+            onClick={() => dispatch(toggleSideNavCollapsed())}
+          />
 
-            {screenSize !== SMALL && (
-              <Link href={HOME_PATH}>
-                <Image
-                  width={'8rem'}
-                  preview={false}
-                  src={'/gov-es-logo.svg'}
-                />
-              </Link>
-            )}
-          </Flex>
-
-          <Flex align={'center'} gap={'1rem'}>
-            <Button
-              shape={'circle'}
-              type="text"
-              size={'large'}
-              icon={
-                <Icon>
-                  <BiSearch style={{ color: 'white' }} />
-                </Icon>
-              }
-            />
-            <Button
-              type="text"
-              shape={'circle'}
-              size={'large'}
-              icon={
-                <Icon>
-                  <BiQuestionMark style={{ color: 'white' }} />
-                </Icon>
-              }
-            />
-            <Badge count={13} offset={[-6, 6]}>
-              <Button
-                type="text"
-                shape={'circle'}
-                size={'large'}
-                icon={
-                  <Icon>
-                    <BiBell style={{ color: 'white' }} />
-                  </Icon>
-                }
-              />
-            </Badge>
-            <LoggedUserDropdown />
-          </Flex>
+          {screenSize !== SMALL && (
+            <Link href={HOME_PATH}>
+              <Image width={'8rem'} preview={false} src={'/gov-es-logo.svg'} />
+            </Link>
+          )}
         </Flex>
-      </Layout.Header>
-    </>
+
+        <Flex align={'center'} gap={'1rem'}>
+          <Button
+            shape={'circle'}
+            type="text"
+            size={'large'}
+            icon={
+              <Icon>
+                <BiSearch style={{ color: 'white' }} />
+              </Icon>
+            }
+          />
+          <Button
+            type="text"
+            shape={'circle'}
+            size={'large'}
+            icon={
+              <Icon>
+                <BiQuestionMark style={{ color: 'white' }} />
+              </Icon>
+            }
+          />
+          <Badge count={13} offset={[-6, 6]}>
+            <Button
+              type="text"
+              shape={'circle'}
+              size={'large'}
+              icon={
+                <Icon>
+                  <BiBell style={{ color: 'white' }} />
+                </Icon>
+              }
+            />
+          </Badge>
+          <LoggedUserDropdown />
+        </Flex>
+      </Flex>
+    </Layout.Header>
   );
 }

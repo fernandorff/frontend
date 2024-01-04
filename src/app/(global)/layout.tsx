@@ -11,7 +11,7 @@ import { RootState } from '@/services/state/redux/store/store';
 export default function HomeLayout({
   children,
 }: {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 }) {
   const screenSize = useScreenSize();
   const isSideNavCollapsed = useSelector(
@@ -26,9 +26,10 @@ export default function HomeLayout({
         <Layout.Content
           style={{
             overflow: 'auto',
-            // minHeight: '0',
           }}
-          className={screenSize !== SMALL || isSideNavCollapsed ? 'p-4' : ''}
+          className={
+            screenSize !== SMALL || isSideNavCollapsed ? 'px-8 py-4' : ''
+          }
         >
           {children}
         </Layout.Content>

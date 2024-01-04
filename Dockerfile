@@ -1,11 +1,11 @@
-FROM node:18-alpine as deps
+FROM node:18-alpine AS deps
 ARG BUILD_ENV=develop
 USER node
 WORKDIR /home/node
 COPY --chown=node:node . .
-RUN npm ci 
+RUN npm ci
 
-FROM node:18-alpine as builder
+FROM node:18-alpine AS builder
 ARG BUILD_ENV=develop
 USER node
 WORKDIR /home/node

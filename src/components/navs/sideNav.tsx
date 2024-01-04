@@ -157,27 +157,25 @@ export default function SideNav() {
   }, [pathname]);
 
   return (
-    <>
-      <Layout.Sider
-        className={'shadow'}
-        theme={'light'}
-        width={screenSize == SMALL ? '100%' : '15rem'}
-        collapsible
-        collapsedWidth={0}
-        collapsed={isCollapsed}
-        trigger={null}
-        onCollapse={() => dispatch(toggleSideNavCollapsed())}
-      >
-        <Flex justify={'center'}>
-          <Image
-            width={'8rem'}
-            preview={false}
-            src={'/detran-es-logo.svg'}
-            className={'p-2'}
-          />
-        </Flex>
-        <Menu mode="inline" items={menuItems} selectedKeys={[pathname]} />
-      </Layout.Sider>
-    </>
+    <Layout.Sider
+      className={'shadow'}
+      theme={'light'}
+      width={screenSize == SMALL ? '100%' : '15rem'}
+      collapsible
+      collapsedWidth={0}
+      collapsed={isCollapsed}
+      trigger={null}
+      onCollapse={() => dispatch(toggleSideNavCollapsed())}
+    >
+      <Flex justify={'center'}>
+        <Image
+          width={'8rem'}
+          preview={false}
+          src={'/detran-es-logo.svg'}
+          className={'p-2'}
+        />
+      </Flex>
+      <Menu mode="inline" items={menuItems} selectedKeys={[pathname]} />
+    </Layout.Sider>
   );
 }

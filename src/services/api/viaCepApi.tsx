@@ -16,7 +16,7 @@ export const ViaCepApi = createApi({
         try {
           const response = await queryFulfilled;
 
-          if (response.data.erro == true) {
+          if (response.data.erro) {
             notification.error({
               message: 'Não foi possível encontrar o endereço.',
               description: 'Verifique se o CEP está correto e tente novamente.',
