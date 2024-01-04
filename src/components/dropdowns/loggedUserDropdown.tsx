@@ -49,7 +49,10 @@ export default function LoggedUserDropdown() {
 
   return (
     <>
-      <Dropdown menu={{ items, selectable: true, selectedKeys: [pathname] }}>
+      <Dropdown
+        menu={{ items, selectable: true, selectedKeys: [pathname] }}
+        placement={'bottomLeft'}
+      >
         <Button size={'large'} type={'text'} className={'h-16'}>
           <Flex align={'center'} gap={'0.5rem'}>
             <Avatar

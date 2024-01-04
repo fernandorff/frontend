@@ -6,11 +6,14 @@ import {
 } from '@/constants/forms/INPUT_MASKS';
 import { ENTITIES } from '@/constants/_domain/ENTITIES';
 import { AddressFieldsSection } from '@/components/forms/sections/addressFieldsSection';
+import { useScreenSize } from '@/hooks/layout/useScreenSize';
 
 const InputMask = require('react-input-mask');
 
 export function EntityRegistrationForm() {
   const [form] = Form.useForm();
+  const screenSize = useScreenSize();
+  const spanSize = screenSize === 'small' ? 24 : 8;
 
   return (
     <>
@@ -25,7 +28,7 @@ export function EntityRegistrationForm() {
         }}
       >
         <Row gutter={[24, 0]}>
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'entity'}
               label={'Entidade'}
@@ -33,7 +36,6 @@ export function EntityRegistrationForm() {
                 {
                   required: true,
                   message: 'Entidade é obrigatória!',
-                  whitespace: true,
                 },
               ]}
             >
@@ -47,7 +49,7 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'cnpj'}
               label={'CNPJ'}
@@ -72,7 +74,7 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'corporateReason'}
               label={'Razão Social'}
@@ -88,7 +90,7 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'fantasyName'}
               label={'Nome Fantasia'}
@@ -104,7 +106,7 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'cpf'}
               label={'CPF'}
@@ -131,7 +133,7 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'requestDate'}
               label={'Data de Solicitação'}
@@ -151,9 +153,9 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <AddressFieldsSection form={form} />
+          <AddressFieldsSection form={form} spanSize={spanSize} />
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'phone1'}
               label={'Telefone 1'}
@@ -172,7 +174,7 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item name={'phone2'} label={'Telefone 2'}>
               <InputMask
                 mask={BR_CELLPHONE_MASK}
@@ -187,7 +189,7 @@ export function EntityRegistrationForm() {
             </Form.Item>
           </Col>
 
-          <Col span={8}>
+          <Col span={spanSize}>
             <Form.Item
               name={'email'}
               label={'Email'}

@@ -7,7 +7,7 @@ import {
   BiTrendingUp,
   BiUserPlus,
 } from 'react-icons/bi';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Icon from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
@@ -33,9 +33,7 @@ import {
   setSideNavStateCollapsed,
   toggleSideNavCollapsed,
 } from '@/services/state/redux/store/reducers/sideNavSlice';
-import { useBreakpoint } from '@ant-design/pro-utils';
-import { isBreakpointUp } from '@/utils/breakpointUtils';
-import { router } from 'next/client';
+import { SMALL, useScreenSize } from '@/hooks/layout/useScreenSize';
 
 const menuItems: MenuProps['items'] = [
   {
@@ -145,7 +143,7 @@ const menuItems: MenuProps['items'] = [
 ];
 
 export default function SideNav() {
-  const breakpoint = useBreakpoint();
+  const screenSize = useScreenSize();
   const pathname = usePathname();
   const dispatch = useDispatch();
   const isCollapsed = useSelector(
@@ -153,14 +151,16 @@ export default function SideNav() {
   );
 
   useEffect(() => {
-    dispatch(setSideNavStateCollapsed(true));
+    if (screenSize == SMALL) {
+      dispatch(setSideNavStateCollapsed(true));
+    }
   }, [pathname]);
 
   return (
     <>
       <Layout.Sider
         theme={'light'}
-        width={isBreakpointUp('sm', breakpoint) ? '15rem' : '100%'}
+        width={screenSize == SMALL ? '100%' : '15rem'}
         collapsible
         collapsedWidth={0}
         collapsed={isCollapsed}

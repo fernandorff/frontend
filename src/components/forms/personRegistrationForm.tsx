@@ -2,15 +2,15 @@ import { Button, Col, DatePicker, Flex, Form, Input, Row } from 'antd';
 import { BR_CELLPHONE_MASK, CPF_MASK } from '@/constants/forms/INPUT_MASKS';
 import { AddressFieldsSection } from '@/components/forms/sections/addressFieldsSection';
 import { useBreakpoint } from '@ant-design/pro-utils';
-import { isBreakpointUp } from '@/utils/breakpointUtils';
+import { useScreenSize } from '@/hooks/layout/useScreenSize';
 
 const InputMask = require('react-input-mask');
 
 export function PersonRegistrationForm() {
   const [form] = Form.useForm();
   const breakpoint = useBreakpoint();
-
-  const spanSize = isBreakpointUp('sm', breakpoint) ? 8 : 24;
+  const screenSize = useScreenSize();
+  const spanSize = screenSize === 'small' ? 24 : 8;
 
   return (
     <>

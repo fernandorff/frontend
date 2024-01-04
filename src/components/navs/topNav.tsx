@@ -7,13 +7,14 @@ import { BiBell, BiQuestionMark, BiSearch } from 'react-icons/bi';
 import Link from 'next/link';
 import { HOME_PATH } from '@/constants/paths/PAGE_PATHS';
 import { useBreakpoint } from '@ant-design/pro-utils';
-import { isBreakpointUp } from '@/utils/breakpointUtils';
 import { useDispatch } from 'react-redux';
 import { toggleSideNavCollapsed } from '@/services/state/redux/store/reducers/sideNavSlice';
+import { SMALL, useScreenSize } from '@/hooks/layout/useScreenSize';
 
 export default function TopNav() {
   const breakpoint = useBreakpoint();
   const dispatch = useDispatch();
+  const screenSize = useScreenSize();
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function TopNav() {
               onClick={() => dispatch(toggleSideNavCollapsed())}
             />
 
-            {isBreakpointUp('sm', breakpoint) && (
+            {screenSize !== SMALL && (
               <Link href={HOME_PATH}>
                 <Image
                   width={'8rem'}
