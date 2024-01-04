@@ -1,13 +1,8 @@
 import { Button, Col, DatePicker, Flex, Form, Input, Row, Select } from 'antd';
-import {
-  BR_CELLPHONE_MASK,
-  CNPJ_MASK,
-  CPF_MASK,
-} from '@/constants/forms/INPUT_MASKS';
+import { CNPJ_MASK, CPF_MASK } from '@/constants/forms/INPUT_MASKS';
 import { AddressFieldsSection } from '@/components/forms/sections/addressFieldsSection';
 import { useScreenSize } from '@/hooks/layout/useScreenSize';
 import React from 'react';
-import { ENTITIES } from '@/constants/_domain/ENTITIES';
 import { PROFESSIONS } from '@/constants/_domain/PROFESSIONS';
 import { ACCREDITATION_SITUATIONS } from '@/constants/_domain/ACCREDITATION_SITUATIONS';
 

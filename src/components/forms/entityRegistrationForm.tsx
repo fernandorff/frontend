@@ -86,7 +86,7 @@ export function EntityRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} />
+              <Input placeholder={'Razao Social'} size={'large'} />
             </Form.Item>
           </Col>
 
@@ -102,7 +102,7 @@ export function EntityRegistrationForm() {
                 },
               ]}
             >
-              <Input size={'large'} />
+              <Input placeholder={'Nome Fantasia'} size={'large'} />
             </Form.Item>
           </Col>
 

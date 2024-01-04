@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Breadcrumb, Typography } from 'antd';
+import { Breadcrumb, Flex, Typography } from 'antd';
 import Link from 'next/link';
 import Icon from '@ant-design/icons';
 import { BiHome, BiUser, BiUserPlus } from 'react-icons/bi';
@@ -47,11 +47,11 @@ const breadcrumbItems = [
 export default function EntityRegistrationPage() {
   return (
     <>
-      <Breadcrumb className={'mb-4'} items={breadcrumbItems} />
-      <Typography.Title className={'mb-6'} level={4}>
-        Cadastro de entidade
-      </Typography.Title>
-      <EntityRegistrationForm />
+      <Flex vertical gap={'0.5rem'}>
+        <Breadcrumb items={breadcrumbItems} />
+        <Typography.Title level={4}>Cadastro de entidade</Typography.Title>
+        <EntityRegistrationForm />
+      </Flex>
     </>
   );
 }
